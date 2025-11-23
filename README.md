@@ -1,6 +1,9 @@
 # hyperliquid-node
+NOTICE: This repository is a fork of [BuckshotCapital/hyperliquid-node](https://github.com/BuckshotCapital/hyperliquid-node)
 
 Containerised Hyperliquid node meant primarily for RPC usage
+
+Join the discussion: [@buckshotcapitaltech](https://t.me/buckshotcapitaltech)
 
 ## What?
 
