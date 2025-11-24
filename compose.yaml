@@ -2,7 +2,7 @@
 name: "hyperliquid"
 services:
   node:
-    image: "ghcr.io/buckshotcapital/hyperliquid-node:${NETWORK:-mainnet}"
+    image: "ghcr.io/katanacap/hyperliquid-node:mainnet"
     build:
       dockerfile: "Dockerfile"
       context: .
