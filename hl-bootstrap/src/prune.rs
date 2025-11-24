@@ -103,18 +103,17 @@ async fn collect_files_recursive(
                 continue;
             }
 
-            if let Some(filename) = path.file_name() {
-                if filename == "visor_child_stderr" {
-                    continue;
-                }
+            if let Some(filename) = path.file_name()
+                && filename == "visor_child_stderr"
+            {
+                continue;
             }
 
-            if let Ok(modified) = metadata.modified() {
-                if let Ok(age) = now.duration_since(modified) {
-                    if age > cutoff_duration {
-                        files_to_remove.push(path);
-                    }
-                }
+            if let Ok(modified) = metadata.modified()
+                && let Ok(age) = now.duration_since(modified)
+                && age > cutoff_duration
+            {
+                files_to_remove.push(path);
             }
         }
     }
