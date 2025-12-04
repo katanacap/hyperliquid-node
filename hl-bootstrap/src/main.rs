@@ -211,11 +211,18 @@ fn run_node(rt: Runtime, args: &Cli) -> eyre::Result<()> {
 
     let _metrics_server = args.metrics_listen_address.map(|address| {
         let metrics_healthy_drift_threshold = args.metrics_healthy_drift_threshold.into();
+        // Default node URL is localhost:3001 (where hl-visor serves /info)
+        let node_url = std::env::var("HL_BOOTSTRAP_NODE_URL")
+            .ok()
+            .or(Some("http://127.0.0.1:3001".to_string()));
         rt.spawn(async move {
             info!(%address, "starting metrics server");
-            if let Err(err) =
-                crate::monitor::server::run_metrics_server(address, metrics_healthy_drift_threshold)
-                    .await
+            if let Err(err) = crate::monitor::server::run_metrics_server(
+                address,
+                metrics_healthy_drift_threshold,
+                node_url,
+            )
+            .await
             {
                 error!(?err, "failed to start metrics server")
             }

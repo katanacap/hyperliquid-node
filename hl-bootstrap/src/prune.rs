@@ -154,7 +154,11 @@ mod tests {
         #[cfg(unix)]
         {
             use filetime::FileTime;
-            filetime::set_file_times(path, FileTime::from_system_time(mtime), FileTime::from_system_time(mtime))?;
+            filetime::set_file_times(
+                path,
+                FileTime::from_system_time(mtime),
+                FileTime::from_system_time(mtime),
+            )?;
         }
         #[cfg(not(unix))]
         {
@@ -211,7 +215,10 @@ mod tests {
         run_cleanup(&data_dir, cutoff).await?;
 
         // Base directory file should still exist
-        assert!(base_file.exists(), "Base directory file should not be removed");
+        assert!(
+            base_file.exists(),
+            "Base directory file should not be removed"
+        );
 
         Ok(())
     }
@@ -234,7 +241,10 @@ mod tests {
         run_cleanup(&data_dir, cutoff).await?;
 
         // visor_child_stderr should still exist
-        assert!(stderr_file.exists(), "visor_child_stderr should not be removed");
+        assert!(
+            stderr_file.exists(),
+            "visor_child_stderr should not be removed"
+        );
 
         Ok(())
     }
